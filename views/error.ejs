@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= error %> Error - Internship Finder</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #6b5bd2;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        .error-message {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+        .error-description {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .home-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #6b5bd2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .home-link:hover {
+            background-color: #5a4bc2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #6b5bd2;
+        }
+        .error-icon-404::before { content: '🔍'; }
+        .error-icon-500::before { content: '⚠️'; }
+        .error-icon-403::before { content: '🔒'; }
+        .error-icon-401::before { content: '👤'; }
+        .error-icon-default::before { content: '❌'; }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <%- include('partials/navbar') %>
+
+    <div class="error-container">
+        <div class="error-icon error-icon-<%= error === '404' || error === '500' || error === '403' || error === '401' ? error : 'default' %>"></div>
+        <div class="error-code"><%= error %></div>
+        <div class="error-message"><%= message %></div>
+        <div class="error-description">
+            <% if (error === '404') { %>
+                The page you're looking for doesn't exist or has been moved.
+            <% } else if (error === '500') { %>
+                We're experiencing some technical difficulties. Please try again later.
+            <% } else if (error === '403') { %>
+                You don't have permission to access this resource.
+            <% } else if (error === '401') { %>
+                Please log in to access this resource.
+            <% } else { %>
+                An unexpected error occurred. Please try again later.
+            <% } %>
+        </div>
+        <a href="/" class="home-link">Return to Home</a>
+    </div>
+</body>
+</html> 
